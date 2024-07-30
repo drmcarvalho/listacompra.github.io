@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://unpkg.com/vue@3"></script>
+    <title>Vue fundamentos</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div id="shopping-list">
+        <div class="header">                       
+            <div class="block">
+                <h1>{{ header || "Bem vindo" }}</h1> 
+                <button class="btn red block" v-if="editing" @click="doEdit(false)">Cancelar</button>
+                <button class="btn green block" v-else @click="doEdit(true)">Add produtos para a lista</button>
+            </div>
+        </div>
+        <div v-if="editing" class="block">            
+            <div class="block">
+                <label>Descrição do produto:</label>
+                <input class="input-res" @keyup.enter="saveItem" v-model.trim="newItem" type="text" placeholder="Add um produto" />
+                
+            </div>
+            <div class="block">
+                <label>Gasto estimado:</label>
+                <input class="input-res" type="number" v-model.number="newPrice"
+                    placeholder="Digite o gasto estimado do produto" />
+            </div>
+            <div class="block">
+                <label class="priority container">
+                    <input type="checkbox" id="checkbox1" v-model="newItemHighPriority" />
+                    <span class="checkmark"></span>
+                    Alta prioridade
+                </label>
+            </div>
+            <div class="block">
+                <button @click="saveItem" class="btn blue" type="button" :disabled="newItem.length === 0">
+                    Salvar item
+                </button>
+                <button @click="clearFields" class="btn blue" type="button">
+                    Limpar campos
+                </button>
+            </div>
+        </div>
+
+        <div class="block">
+            <p>Lista de produtos</p>
+            <div v-if="items.length > 0">
+                <p>Gasto total estimado: {{ formatToCurrency(sumPriceOfList) }}</p>
+                <ul>
+                    <p>
+                        <li 
+                            v-for="(item, index) in transformedItems" 
+                            @click="togglePurchased(item)"
+                            :key="item.id" 
+                            :class="[
+                                {strikeout: item.purchased},
+                                {priority: item.highPriority},
+                                'static-class'                            
+                            ]">
+                            {{ index + 1 }} - {{ item.name }} {{ formatToCurrency(item.price) }}
+                        </li>
+                    </p>
+                </ul>
+            </div>
+            <div v-else>
+                <p>Nenhum produto na lista</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        const setup = {
+            data() {
+                return {
+                    header: "Sua lista de compras! :D",
+                    newItem: "",
+                    newItemHighPriority: false,
+                    newPrice: "",
+                    items: [],
+                    editing: false,
+                }
+            },
+            methods: {
+                formatToCurrency(v) {
+                    return new Intl.NumberFormat('pt-BR',
+                        {
+                            style: 'currency',
+                            currency: 'BRL',
+                            minimumFractionDigits: 2
+                        }).format(v,)
+                },
+                clearFields() {
+                    this.newItem = ""
+                    this.newPrice = ""
+                    this.newItemHighPriority = false
+                },
+                saveItem() {
+                    if (this.newItem && this.newPrice > 0) {
+                        this.items.push({ id: this.items.length + 1, name: this.newItem, price: this.newPrice, highPriority: this.newItemHighPriority })
+                        this.clearFields()
+                    }
+                },
+                doEdit(editing) {
+                    this.editing = editing
+                },
+                togglePurchased(item) {
+                    item.purchased = !item.purchased
+                },
+            },
+            computed: {
+                transformedItems() {                    
+                    let array = [...this.items].reverse()
+                    array.sort((a) => !a.highPriority ? 1 : 0)
+                    return array
+                },
+                sumPriceOfList() {
+                    let initialValue = 0;
+                    const sum = [...this.items].reduce((accumulator, currentValue) => accumulator + currentValue.price, initialValue,)
+                    return sum
+                }
+            }
+        }
+        const app = Vue.createApp(setup).mount("#shopping-list")
+    </script>
+</body>
+</html>
