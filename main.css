@@ -1,0 +1,242 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+/* General */
+body {
+  background-color: #fcfcfc;
+}
+
+.block {
+  margin: 0 auto;
+  max-width: 900px;
+  padding: 20px 5px;
+}
+
+.strikeout {
+  text-decoration: line-through;
+  color: darkgrey;
+}
+
+.priority {
+  color: orange;
+}
+
+/* General end */
+
+/* Input */
+.input-res {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  font: 15px/1 'Open Sans', sans-serif;
+  font-size: 3vmin;
+  color: #333;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  max-width: 500px;
+  background-color: #ddd;
+  border: none;
+  padding: 10px 11px 11px 11px;
+  border-radius: 3px;
+  box-shadow: none;
+  outline: none;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* Input end */
+
+/* Checkbox */
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/* Checkbox end */
+
+/* Fonts */
+ul {
+  list-style-type: none;
+}
+
+h1 {
+  font-size: 4.9vw;
+}
+
+h2 {
+  font-size: 6.0vh;
+}
+
+p {
+  font-size: 4vmin;
+}
+
+li {
+  font-size: 4vmin;
+}
+
+label {
+  font-size: 3vmin;
+}
+
+html {
+  font-family: "Open Sans", sans-serif;
+}
+
+/* Fonts end */
+
+/* Button */
+.btn {
+  padding: 1em 2.1em 1.1em;
+  border-radius: 3px;
+  margin: 8px 8px 8px 8px;
+  color: #fcfcfc;
+  background: #e74c3c;
+  background-color: #fcfcfc;
+  display: inline-block;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+  font-family: sans-serif;
+  font-weight: 800;
+  font-size: .85em;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+  -webkit-box-shadow: 0em -0.3rem 0em rgba(0, 0, 0, 0.1) inset;
+  -moz-box-shadow: 0em -0.3rem 0em rgba(0, 0, 0, 0.1) inset;
+  box-shadow: 0em -0.3rem 0em rgba(0, 0, 0, 0.1) inset;
+  position: relative;
+}
+
+.btn:hover,
+.btn:focus {
+  opacity: 0.8;
+}
+
+.btn:active {
+  -webkit-transform: scale(0.80);
+  -moz-transform: scale(0.80);
+  -ms-transform: scale(0.80);
+  -o-transform: scale(0.80);
+  transform: scale(0.80);
+}
+
+.btn.block {
+  display: block !important;
+}
+
+.btn.circular {
+  border-radius: 50em !important;
+}
+
+/* Colours */
+.red {
+  background-color: #d55050;
+}
+
+.teal {
+  background-color: #50d5a1;
+}
+
+.sky {
+  background-color: #6698cb;
+}
+
+.black {
+  background-color: #5c6166;
+}
+
+.gray {
+  color: black;
+  background-color: #d2d2d2;
+}
+
+.orange {
+  background-color: #e96633;
+}
+
+.pink {
+  background-color: #cb99c5;
+}
+
+.green {
+  background-color: #5bbd72;
+}
+
+.blue {
+  background-color: #7abedf;
+}
+
+.yellow {
+  background-color: #ecc92b;
+}
+
+.purple {
+  background-color: #564f8a;
+}
+
+/* Button end */
